@@ -18,7 +18,7 @@ def get_user_input
   gets.strip
 end
 
-def end_game
+def end_game(card_total)
   puts "Sorry, you hit #{card_total}. Thanks for playing!"
 end
 
@@ -28,6 +28,7 @@ def initial_round
   card_total += deal_card
   
   display_card_total(card_total)
+  card_total
 end
 
 def hit?(card_total)
@@ -53,7 +54,11 @@ end
 
 def runner
   welcome
-  initial_round
-  hit?
+  card_total = initial_round
+  until card_total > 21
+    hit?(card_total)
+  end
+  
+  end_game(card_total)
 end
     
